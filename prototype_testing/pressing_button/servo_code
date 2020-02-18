@@ -1,5 +1,5 @@
 
-#include <Servo.h>  //add '<' and '>' before and after servo.h
+#include <Servo.h> 
  
 int servoPin = 9;
  

@@ -1,1 +1,130 @@
 //OMNI WHEEL CODE (X AND Y MOVEMENTS)
+
+// ****************************************************
+// Motor Controller Ports
+// ****************************************************
+#define MotorA 9
+#define In1 3
+#define In2 4
+
+#define MotorB 10
+#define In3 5
+#define In4 6
+
+#define MotorC 11
+#define In5 7
+#define In6 8
+
+char val = 0; //holds ascii from serial line
+
+int motor_speed = 200;
+
+void setup(){
+  Serial.begin(9600);
+  Serial.println("Hello I am alive");
+  
+  pinMode(MotorA, OUTPUT);
+  pinMode(In1, OUTPUT);
+  pinMode(In2, OUTPUT);
+  
+  pinMode(MotorB, OUTPUT);
+  pinMode(In3, OUTPUT);
+  pinMode(In4, OUTPUT);
+  
+  pinMode(MotorC, OUTPUT);
+  pinMode(In5, OUTPUT);
+  pinMode(In6, OUTPUT);
+
+}
+
+void loop(){
+  if (Serial.available()){
+    val = Serial.read();
+
+    if (val == 'w'){
+      
+      //turn on MotorA
+      digitalWrite(In1, HIGH);
+      digitalWrite(In2, LOW);
+      // set speed of motor A
+      analogWrite(MotorA, motor_speed);
+      
+      // turn on motor B
+      digitalWrite(In3, HIGH);
+      digitalWrite(In4, LOW);
+      // set speed of motor B
+      analogWrite(MotorB, motor_speed);
+
+      //keep MotorC off
+      digitalWrite(In3, LOW);
+      digitalWrite(In4, LOW);
+
+    }
+    else if (val == 's'){
+      
+      //turn on MotorA
+      digitalWrite(In1, LOW);
+      digitalWrite(In2, HIGH);
+      // set speed of motor A
+      analogWrite(MotorA, motor_speed);
+      
+      // turn on motor B
+      digitalWrite(In3, LOW);
+      digitalWrite(In4, HIGH);
+      // set speed of motor B
+      analogWrite(MotorB, motor_speed);
+
+      //keep MotorC off
+      digitalWrite(In3, LOW);
+      digitalWrite(In4, LOW);
+
+    }
+     else if (val == 'd'){
+      
+      //turn on MotorA
+      digitalWrite(In1, HIGH);
+      digitalWrite(In2, LOW);
+      // set speed of motor A
+      analogWrite(MotorA, motor_speed);
+      
+      //Turn on motor B
+      digitalWrite(In3, LOW);
+      digitalWrite(In4, HIGH);
+      // set speed of motor B
+      analogWrite(MotorB, motor_speed);
+
+      //turn on MotorC 
+      digitalWrite(In3, HIGH);
+      digitalWrite(In4, LOW);
+      // set speed of motor B
+      analogWrite(MotorC, motor_speed);
+    }
+    else if (val == 'a'){
+      
+      //turn on MotorA
+      digitalWrite(In1, LOW);
+      digitalWrite(In2, HIGH);
+      // set speed of motor A
+      analogWrite(MotorA, motor_speed);
+      
+      // turn on MotorB
+      digitalWrite(In3, HIGH);
+      digitalWrite(In4, LOW);
+      // set speed of motor B
+      analogWrite(MotorB, motor_speed);
+
+      //turn on MotorC
+      digitalWrite(In3, LOW);
+      digitalWrite(In4, HIGH);
+      // set speed of motor B
+      analogWrite(MotorC, motor_speed);
+    }
+    else if(val == 'k')
+    {
+        digitalWrite(In1, LOW);
+        digitalWrite(In2, LOW);  
+        digitalWrite(In3, LOW);
+        digitalWrite(In4, LOW);
+    }
+  }
+}

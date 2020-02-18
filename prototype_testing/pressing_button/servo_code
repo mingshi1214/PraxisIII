@@ -16,6 +16,7 @@ void setup()
 //BASIC CODE
 void loop()
 {
+
 //control the servo's direction and the position of the motor
 // 
 //   servo.write(45);      // Turn SG90 servo Left to 45 degrees
@@ -28,14 +29,7 @@ void loop()
 //   delay(1000);
  
 //end control the servo's direction and the position of the motor
-  if (Serial.available()){
-    val = Serial.read();
-    Serial.println(val);
 
-    if (val == 'k'){
-      break;
-    }
-    else{
     //control the servo's speed  
     //if you change the delay value (from example change 50 to 10), the speed of the servo changes
       for(servoAngle = 0; servoAngle < 180; servoAngle++)  //move the micro servo from 0 degrees to 180 degrees
@@ -50,4 +44,3 @@ void loop()
       }
       //end control the servo's speed  
     }
-  }

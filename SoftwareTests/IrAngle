@@ -1,0 +1,81 @@
+//collects data from an analog sensor
+
+int sensorpin1 = 0;                 // analog pin used to connect the sharp sensor
+int val1 = 0;                 // variable to store the values from sensor(initially zero)
+int sensorpin2 = 1;
+int val2 = 0;
+int dist=20;      //set a distance between the two sensors
+double angle=0;
+double pi=3.1415;
+
+//holdervalues
+
+int val11=0;
+int val12=0;
+int val13=0;
+int val14=0;
+int val15=0;
+
+int val21=0;
+int val22=0;
+int val23=0;
+int val24=0;
+int val25=0;
+
+//counter
+int cnt=0;
+
+//average
+int ave1 = 0;
+int ave2 = 0;
+
+void setup()
+{
+  Serial.begin(9600);               // starts the serial monitor
+}
+ 
+void loop()
+{
+  if (cnt==0){
+    val11=analogRead(sensorpin1);
+    val21=analogRead(sensorpin2);
+  }
+  if (cnt==1){
+    val12=analogRead(sensorpin1);
+    val22=analogRead(sensorpin2);
+  }
+  if (cnt==2){
+    val13=analogRead(sensorpin1);
+    val23=analogRead(sensorpin2);
+  }
+  if (cnt==3){
+    val14=analogRead(sensorpin1);
+    val24=analogRead(sensorpin2);
+  }
+  if (cnt==4){
+    val15=analogRead(sensorpin1);
+    val25=analogRead(sensorpin2);
+    ave1=(val11+val12+val13+val14+val15)/5;
+    ave2=(val21+val22+val23+val24+val25)/5;
+    cnt=-1;
+    val11=0;
+    val12=0;
+    val13=0;
+    val14=0;
+    val15=0;
+
+    val21=0;
+    val22=0;
+    val23=0;
+    val24=0;
+    val25=0;
+
+    angle=atan((ave1-ave2)/dist);
+    angle=angle*180/pi;
+
+    Serial.print("angle: ");
+    Serial.println(angle);
+  }
+  cnt=cnt+1;
+  delay(10);                    // wait for this much time before printing next value
+}
